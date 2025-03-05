@@ -1,0 +1,25 @@
+#title > h1 {
+    font-family: "Caesar Dressing", system-ui;
+    font-weight: 50;
+    font-size: 50px;
+    font-style: normal;
+    color: #e3c808;
+    width: fit-content;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 40px;
+    position: relative;
+}
+#title {
+    width: fit-content;
+    margin: 0 auto auto;
+}
+
+
+
+body {
+    background-image: url("../public/IMG/sfondo.jpg");
+    background-position: center;
+    background-position-y: top;
+    background-repeat: no-repeat;
+}
