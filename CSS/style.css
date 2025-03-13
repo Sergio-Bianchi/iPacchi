@@ -1,4 +1,4 @@
-#title > h1 {
+h1 {
     font-family: "Caesar Dressing", system-ui;
     font-weight: 50;
     font-size: 50px;
@@ -15,11 +15,8 @@
     margin: 0 auto auto;
 }
 
-
-
 body {
-    background-image: url("../public/IMG/sfondo.jpg");
-    background-position: center;
-    background-position-y: top;
     background-repeat: no-repeat;
+    background-position-x: center;
+    background-size: cover  ;
 }
