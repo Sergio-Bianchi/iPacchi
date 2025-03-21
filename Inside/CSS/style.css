@@ -1,0 +1,28 @@
+#sfondo {
+    width: 100%;
+    transform: scale(1.2) translate(36px);
+    position: absolute;
+}
+
+#jones {
+    position: absolute;
+    width: 400px;
+    bottom: 20px;
+    left: 0px;
+    transition: all 3s ease; 
+}
+
+#jones.bottom {
+    bottom: -100%;
+}
+
+#jones.left {
+    left: -80%;
+}
+
+body {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
