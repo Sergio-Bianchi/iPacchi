@@ -9,7 +9,7 @@
     width: 400px;
     bottom: 20px;
     left: 0px;
-    transition: all 3s ease; 
+    transition: all 1.5s ease; 
 }
 
 #jones.bottom {
@@ -20,9 +20,60 @@
     left: -80%;
 }
 
+
+#bubble {
+    position: absolute;
+    width: 400px;
+    border: 1px solid red;
+}
+
+#dialogue > p {
+    width: 380px;
+    height: 150px;
+    border: 1px solid green;
+}
+
 body {
     margin: 0;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
+}
+
+
+
+#choosed {
+    position: absolute;
+    width: 300px;
+    left: 815px;
+    top: 510px;
+}
+
+
+#choose-overlay { 
+    position: absolute;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    grid-template-rows: auto auto auto auto;
+    grid-area: auto auto auto auto;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+#choose-overlay > img{
+    width: 200px;
+    margin: auto;
+}
+
+
+
+
+
+
+
+
+.hidden {
+    display: none !important;
 }
