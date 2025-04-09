@@ -52,7 +52,7 @@ body {
     width: 210px;
     left: 50%;
     transform: translate(-50%);
-    top: 55%;
+    top: 45%;
 }
 
 
@@ -134,7 +134,7 @@ body {
     transition: all 1.5s ease;
 }
 
-#offerte-sx > div.left {
+#offerte-sx > div.translated {
     transform: translate(-200%);
 }
 
@@ -159,7 +159,7 @@ body {
     transition: all 1.5s ease;
 }
 
-#offerte-dx > div.right {
+#offerte-dx > div.translated {
     transform: translate(+200%);
 }
 
