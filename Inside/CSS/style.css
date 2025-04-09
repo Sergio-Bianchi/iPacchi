@@ -53,7 +53,6 @@ body {
     left: 50%;
     transform: translate(-50%);
     top: 55%;
-    transition: all 1.5s ease;
 }
 
 
@@ -87,7 +86,6 @@ body {
     position: absolute;
     margin: auto;
     bottom: 10px;
-    transition: all 1.5s ease;
 }
 
 #packages-container > img {

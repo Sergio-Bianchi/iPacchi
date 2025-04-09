@@ -4,7 +4,6 @@ $("#jones").click(function(){
 
 $("#choose-overlay > img").click(function() {
     phase2()
-
 })
 
 const scrollCheck = document.querySelector("#scroll-check");
@@ -23,38 +22,43 @@ $("#choosed-overlay > img").click(function() {
 $("#packages-container > img").click(function(self) {
     $(this).addClass("opacity-0")
     $("#choosed-overlay").removeClass("hidden")
+    if(choosed_amount == 7) {
+        phase3()
+    }
 })
 
 
 let values = [0, 1, 5, 10, 20, 50, 75, 100, 200, 500, 5000, 10000, 15000, 20000, 30000, 50000, 750000, 100000, 200000, 300000]
-let choosed_amount = 0
+let choosed_amount = 1
 
 function phase1(){
-    $("#choosed").fadeOut(10)
-    $("#offerte-sx").fadeOut(10)
-    $("#offerte-dx").fadeOut(10)
-    $("#packages-container").fadeOut(10)
+    console.log("PHASE 1")
+
+    $("#choosed").fadeOut(0)
+    $("#offerte-sx").fadeOut(0)
+    $("#offerte-dx").fadeOut(0)
+    $("#packages-container").fadeOut(0)
+
     console.log("Scegli un pacco")
 }
 
 
-async function phase2() {
+function phase2() {
+    console.log("PHASE 2")
 
-    let datetime1 = new Date().getTime()
-    let datetime2 = datetime1 + 5000
-
-    $("#choose-overlay").addClass("opacity-0")
+    $("#choose-overlay").delay(1000).addClass("opacity-0")
     $("#choosed").delay(2000).fadeIn(1000)
-    $("#offerte-sx").delay(2000).fadeIn(1000)
-    $("#offerte-dx").delay(2000).fadeIn(1000)
-    $("#packages-container").delay(2000).fadeIn(1000)
+    $("#offerte-sx").delay(1100).fadeIn(1000)
+    $("#offerte-dx").delay(1100).fadeIn(1000)
+    $("#packages-container").delay(1100).fadeIn(1000)
 
     console.log("Scegli 3 pacchi")
-
-    
 }
 
+function phase3() {
+    console.log("PHASE 3")
 
+}
 
 
 phase1()
