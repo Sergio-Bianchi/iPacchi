@@ -7,60 +7,62 @@
     </head>
 
     <body>
+        <div id="block-click" class="hidden"> </div>
+
         <img id="sfondo" src="../Public/IMG/inside.png">
-        <img id="jones" src="../Public/IMG/jones.png" class="hidden">
+        <img id="jones" src="../Public/IMG/jones.png" class="left">
 
-        <div id="dialogue" class="hidden">
+        <div id="dialogue">
             <img id="bubble" src="../Public/IMG/bubble.png">
-
+            <p id="bubble-text" class="font-25"> Ciao Sergio! Benvenuto nel tempio! <br> Scegli un pacco</p>
         </div>
 
 
         <img src="../Public/IMG/closed.png" id="choosed" class="pack"></img>
 
         <div id="choose-overlay" class="">
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
         </div>
 
         <div id="packages-container" class="">
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img>
-            <img src="../Public/IMG/closed.png" class="pack"></img> 
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img>
+            <img src="../Public/IMG/closed.png" class="pack clickable"></img> 
         </div>
 
         <div id="offerte-sx" class="">
@@ -90,7 +92,7 @@
         </div>
 
 
-        <div id="choosed-overlay" class="hidden">
+        <div id="choosed-overlay" class="">
             <img src="../Public/IMG/opened.png" class="pack"></img>
         </div>
     </body>

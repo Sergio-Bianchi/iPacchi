@@ -1,3 +1,11 @@
+#block-click {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
 #sfondo {
     width: 100%;
     
@@ -22,21 +30,32 @@
 }
 
 
+
 #bubble {
     position: absolute;
     width: 400px;
-    border: 1px solid red;
-    top: 200px;
+    bottom: 380px;
     left: 270px;
 }
 
-
-
-#dialogue > p {
-    width: 380px;
-    height: 150px;
-    border: 1px solid green;
+#bubble-text {
+    position: absolute;
+    bottom: 440px;
+    left: 330px;
+    width: 300px;
+    height: 120px;
+    text-align: center;
 }
+
+
+.font-25 {
+    font-size: 25px;
+}
+
+.font-50 {
+    font-size: 50px;
+}
+
 
 body {
     margin: 0;
@@ -66,15 +85,15 @@ body {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(10px);
-    transition: all 1.5s ease;
 }
 
-#choose-overlay > img{
+#choose-overlay > img {
     width: 200px;
     margin: auto;
 }
-
-
+#choose-overlay > img:hover {
+    cursor: pointer;
+}
 
 #packages-container {
     width: 100%;
@@ -91,6 +110,10 @@ body {
 #packages-container > img {
     height: 100%;
     margin: auto;
+    transition: all 1.5s ease; 
+}
+#packages-container > img:hover {
+    cursor: pointer;
 }
 
 
@@ -101,8 +124,6 @@ body {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(10px);
-
-    transition: all 1.5s ease; 
 }
 
 #choosed-overlay > img {
@@ -111,7 +132,10 @@ body {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+}
 
+#choosed-overlay > img:hover {
+    cursor: pointer;
 }
 
 
