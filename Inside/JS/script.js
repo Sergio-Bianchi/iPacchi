@@ -1,67 +1,90 @@
-    $("#jones").click(function(){
-        $("#jones").addClass("bottom");
-    });
+$("#jones").click(function(){
+    $("#jones").addClass("bottom");
+});
 
-    $("#choose-overlay > img").click(function() {
+$("#choose-overlay > img").click(function() {
+    lockClick()
+    phase2()
+})
+
+
+
+function lockClick() {
+    console.log("CLICK LOCKED")
+    $("#block-click").removeClass("hidden")
+}
+
+function unlockClick() {
+    console.log("CLICK UNLOCKED")
+    $("#block-click").addClass("hidden")
+}
+
+const scrollCheck = document.querySelector("#scroll-check");
+const keyboardCheck = document.querySelector("#keyboard-check");
+
+let last_extracted = -1;
+let last_element_extracted = null
+
+if(outerHeight != innerHeight || outerWidth != innerWidth || window.devicePixelRatio != 1) {
+    console.log("SET FULLSCREEN 100%")
+}
+
+$("#choosed-overlay > img").click(function() {
+    // Nascondi l'overlay aggiungendo la classe. L'animazione son fatti del CSS
+    $("#choosed-overlay").fadeOut()
+    lockClick()
+    // Calcola l'id del valore corrispondente (E+cifra, es E10000), poi la transla via
+    sleep(1000).then(() => {
+        $("#E"+String(last_extracted)).addClass("translated")
+        unlockClick()
+    })
+    $(last_element_extracted).addClass("opacity-0")
+    $(last_element_extracted).attr("src", "../Public/IMG/boxes/"+last_extracted+".png")
+    $(last_element_extracted).removeClass("opacity-0")
+
+
+    choosed_amount++
+    // Se ho scelto 7 pacchi (1 iniziale + 6), passa alla fase successiva
+    // TODO, rimettere a 7 sennò esplode
+    if(choosed_amount == 3) {
+        phase3()
+    }
+
+    if(choosed_amount == 10) {
+        phase3()
+    }
+
+    if(choosed_amount == 13) {
+        phase3()
+    }
+
+    if(choosed_amount > 13 && choosed_amount < 20) {
+        phase3()
+    }
+
+})
+
+$("#packages-container > img.clickable").click(function(self) {
+    // Controllo per verificare se il pacco è ancora effettivamente da clickare (nascondendolo e basta potevi cliccarlo quante volte volevi )
+    if(this.className == "pack clickable") {
+        const extracted_index = random_index()
+        const extracted_value = values[extracted_index]
+        values[extracted_index] = -1;
+
+        last_extracted = extracted_value
+        last_element_extracted = this
+
+        $(this).removeClass("clickable")
+        $("#choosed-overlay > img").attr("src", "../Public/IMG/boxes/"+extracted_value+".png")
         lockClick()
-        phase2()
-    })
-
-
-
-    function lockClick() {
-        $("#block-click").removeClass("hidden")
+        // TODO DA RIDURRE A 5000
+        sleep(1000).then(() => {
+            // $(this).addClass("opacity-0")
+            $("#choosed-overlay").fadeIn(500)
+            unlockClick()
+        })
     }
-
-    function unlockClick() {
-        $("#block-click").addClass("hidden")
-    }
-
-    const scrollCheck = document.querySelector("#scroll-check");
-    const keyboardCheck = document.querySelector("#keyboard-check");
-
-    let last_extracted = -1;
-
-    if(outerHeight != innerHeight || outerWidth != innerWidth || window.devicePixelRatio != 1) {
-        console.log("SET FULLSCREEN 100%")
-    }
-
-    $("#choosed-overlay > img").click(function() {
-        // Nascondi l'overlay aggiungendo la classe. L'animazione son fatti del CSS
-        $("#choosed-overlay").fadeOut()
-
-        // Calcola l'id del valore corrispondente (E+cifra, es E10000), poi la transla via
-        sleep(1000).then(() => $("#E"+String(last_extracted)).addClass("translated"))
-        
-
-        choosed_amount++
-        // Se ho scelto 7 pacchi (1 iniziale + 6), passa alla fase successiva
-        if(choosed_amount == 7) {
-            phase3()
-        }
-        
-
-    })
-
-    $("#packages-container > img.clickable").click(function(self) {
-        // Controllo per verificare se il pacco è ancora effettivamente da clickare (nascondendolo e basta potevi cliccarlo quante volte volevi )
-        if(this.className == "pack clickable") {
-            const extracted_index = random_index()
-            const extracted_value = values[extracted_index]
-            values[extracted_index] = -1;
-
-            last_extracted = extracted_value
-
-            $(this).removeClass("clickable")
-            $("#choosed-overlay > img").attr("src", "../Public/IMG/boxes/"+extracted_value+".png")
-            lockClick()
-            sleep(5000).then(() => {
-                $(this).addClass("opacity-0")
-                $("#choosed-overlay").fadeIn(500)
-                unlockClick()
-            })
-        }
-    })
+})
 
 
 
@@ -72,6 +95,13 @@ function sleep(ms) {
 
 let values = [0, 1, 5, 10, 20, 50, 75, 100, 200, 500, 5000, 10000, 15000, 20000, 30000, 50000, 75000, 100000, 200000, 300000]
 let choosed_amount = 1
+let last_offert = -1
+
+let tipo_offerta = null
+let next_phase = null
+let last_choice = null
+
+
 
 function phase1(){
     console.log("PHASE 1")
@@ -82,11 +112,17 @@ function phase1(){
     $("#choose-overlay").fadeOut(0)
     $("#choosed-overlay").fadeOut(0)
     $("#dialogue").fadeOut(0)
+    $("#prendi-lascia").fadeOut(0)
 
     $("#jones").delay(1000).removeClass("left")
     $("#dialogue").delay(1500).fadeIn()
 
-    $("#choose-overlay").delay(3000).fadeIn(500)
+    sleep(3000).then(() => {
+        $("#jones").addClass("left")
+        $("#dialogue").fadeOut()
+    })
+
+    $("#choose-overlay").delay(4000).fadeIn(500)
 
     console.log("Scegli un pacco")
 }
@@ -96,20 +132,23 @@ function phase2() {
     console.log("PHASE 2")
 
     $("#choose-overlay").delay(1000).fadeOut()
-    $("#bubble-text").delay(1500).fadeOut(300)
     sleep(2000).then(() => {
+        $("#jones").removeClass("left")
         $("#bubble-text").text("Perfetto! Ottima scelta \n Ora scegli 6 pacchi")
+        $("#dialogue").delay(1500).fadeIn(300)
         $("#bubble-text").fadeIn(300)
-        $("#dialogue").delay(2500).fadeOut()
-        sleep(3000).then(()=>$("#jones").addClass("left"))
+        $("#dialogue").delay(1500).fadeOut()
+        sleep(3500).then(()=>$("#jones").addClass("left"))
     })
 
-    $("#choosed").delay(6500).fadeIn(1000)
-    $("#offerte-sx").delay(6600).fadeIn(1000)
-    $("#offerte-dx").delay(6600).fadeIn(1000)
-    $("#packages-container").delay(6600).fadeIn(1000)
+    sleep(6000).then(() => {
+        $("#choosed").fadeIn(1000)
+        $("#offerte-sx").delay(1000).fadeIn(1000)
+        $("#offerte-dx").delay(1000).fadeIn(1000)
+        $("#packages-container").delay(500).fadeIn(1000)
+        unlockClick()
+    })
 
-    unlockClick()
     console.log("Scegli 6 pacchi")
 }
 
@@ -127,11 +166,10 @@ function make_offert() {
     offert = offert_fifth * 5000
     
     if(random_bool()) {
-        console.log(offert + (offert/10))
+        return offert + (offert/10)
     } else {
-        console.log(offert - (offert/10))
+        return offert - (offert/10)
     }
-
 }
 
 
@@ -155,11 +193,72 @@ function random_index() {
     }
 }
 
+
+function hideJones(timeout) {
+    sleep(timeout).then(()=>{
+        $("#dialogue").fadeOut()
+        sleep(1000).then(() => $("#jones").addClass("left"))
+    })
+}
+
+function showJones(timeout) {
+    sleep(timeout).then(()=>{
+        $("#jones").removeClass("left")
+        $("#dialogue").delay(2000).fadeIn()
+    })
+}
+
 function phase3() {
     console.log("PHASE 3")
-    make_offert()
-    
+    last_offert = make_offert()
+    lockClick()
+    sleep(1000).then(() => {
+        $("#jones").removeClass("left")
+        $("#dialogue").delay(1500).fadeIn()
+        $("#bubble-text").text("Ottimo. Ora ti farò un'offerta.")
+        lockClick()
+
+        sleep(4000).then(() => {
+            if(random_bool() && false) {
+                $("#bubble-text").text("OK, adesso scegli un pacco con la quale sostituire il tuo")
+                hideJones(3000)
+
+                tipo_offerta = "scambio"
+            } else {
+                $("#bubble-text").text(last_offert + " €, prendere o lasciare")
+                hideJones(3000)
+                $("#prendi-lascia").delay(4000).fadeIn()
+                sleep(9000).then(()=>unlockClick())
+
+                $("#prendi-button").click(function() {
+                    $("#prendi-lascia").delay(1000).fadeOut()
+                    // TODO
+                    // APRIMENTO PACCO TUO STESSO YODA SONO IO 
+                })
+                $("#lascia-button").click(function() {
+                    lockClick()
+                    $("#prendi-lascia").delay(1000).fadeOut()
+                    $("#bubble-text").fadeOut(0)
+                    showJones(2000)
+                    $("#bubble-text").text("Come non detto... Riprendiamo il nostro gioco!")
+                    $("#bubble-text").delay(4000).fadeIn()
+                    sleep(7000).then(() => {
+                        $("#bubble-text").text("Scegli 3 pacchi")
+                        hideJones(3000)
+                    })
+                    sleep(10000).then(()=>unlockClick())
+                })
+            }
+        })
+    })
 }
+
+
+function phase4() {
+    console.log("PHASE 4")
+}
+
+
 
 
 phase1()
