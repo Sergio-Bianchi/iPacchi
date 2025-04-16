@@ -1,13 +1,7 @@
-$("#jones").click(function(){
-    $("#jones").addClass("bottom");
-});
-
 $("#choose-overlay > img").click(function() {
     lockClick()
     phase2()
 })
-
-
 
 function lockClick() {
     console.log("CLICK LOCKED")
@@ -100,10 +94,11 @@ let last_offert = -1
 let tipo_offerta = null
 let next_phase = null
 let last_choice = null
-
+let player_name = (new URLSearchParams(document.location.search)).get("name")
 
 
 function phase1(){
+
     console.log("PHASE 1")
     $("#choosed").fadeOut(0)
     $("#offerte-sx").fadeOut(0)
@@ -113,6 +108,7 @@ function phase1(){
     $("#choosed-overlay").fadeOut(0)
     $("#dialogue").fadeOut(0)
     $("#prendi-lascia").fadeOut(0)
+    $("#bubble-text").text("Ciao "+ player_name+  "! Benvenuto nel tempio!\n Scegli un pacco")
 
     $("#jones").delay(1000).removeClass("left")
     $("#dialogue").delay(1500).fadeIn()
@@ -134,7 +130,7 @@ function phase2() {
     $("#choose-overlay").delay(1000).fadeOut()
     sleep(2000).then(() => {
         $("#jones").removeClass("left")
-        $("#bubble-text").text("Perfetto! Ottima scelta \n Ora scegli 6 pacchi")
+        $("#bubble-text").text("Perfetto! Ottima scelta "+player_name+" \n Ora scegli 6 pacchi")
         $("#dialogue").delay(1500).fadeIn(300)
         $("#bubble-text").fadeIn(300)
         $("#dialogue").delay(1500).fadeOut()
@@ -194,11 +190,10 @@ function random_index() {
 }
 
 
-function hideJones(timeout) {
-    sleep(timeout).then(()=>{
-        $("#dialogue").fadeOut()
-        sleep(1000).then(() => $("#jones").addClass("left"))
-    })
+function hideJones() {
+    $("#dialogue").fadeOut()
+    $("#jones").addClass("left")
+    $(this).delay(2000).dequeue()
 }
 
 function showJones(timeout) {
@@ -215,19 +210,20 @@ function phase3() {
     sleep(1000).then(() => {
         $("#jones").removeClass("left")
         $("#dialogue").delay(1500).fadeIn()
-        $("#bubble-text").text("Ottimo. Ora ti farò un'offerta.")
+        $("#bubble-text").text("Ottimo. Ora ti farò un'offerta "+player_name)
         lockClick()
 
         sleep(4000).then(() => {
             if(random_bool() && false) {
                 $("#bubble-text").text("OK, adesso scegli un pacco con la quale sostituire il tuo")
                 hideJones(3000)
-
-                tipo_offerta = "scambio"
+                
+                
             } else {
                 $("#bubble-text").text(last_offert + " €, prendere o lasciare")
-                hideJones(3000)
-                $("#prendi-lascia").delay(4000).fadeIn()
+                $(this).delay(4000).queue(hideJones)
+                $("#prendi-lascia-offert").text(last_offert + " €")
+                $("#prendi-lascia").delay(6000).fadeIn()
                 sleep(6000).then(()=>unlockClick())
 
                 $("#prendi-button").click(function() {
@@ -240,9 +236,13 @@ function phase3() {
                     $("#bubble-text").text("Come non detto... Riprendiamo il nostro gioco!")
                     $("#prendi-lascia").delay(1000).fadeOut()
                     showJones(3000) 
+                    let phrase = "Scegli tre pacchi "+player_name
+                    if(choosed_amount >= 13) {
+                        phrase = "Scegli un pacco "+player_name
+                    }
                     sleep(8000).then(() => {
-                        $("#bubble-text").text("Scegli 3 pacchi")
-                        hideJones(2000)
+                        $("#bubble-text").text(phrase)
+                        $(this).delay(2000).queue(hideJones)
                         sleep(4000).then(()=>unlockClick())
                     })
                     

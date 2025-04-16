@@ -212,13 +212,26 @@ body {
 #prendi-lascia > div {
     display: grid;
     position: absolute;
+    grid-template-areas: 
+        "offert offert"
+        "button-1 button-2"
+    ;
+    grid-template-rows: auto auto;
     grid-template-columns: auto auto;
     width: 50%;
-    top: 50%;
+    top: 50%;   
     left: 50%;
     transform: translate(-50%, -50%);
 
 
+}
+
+
+#prendi-lascia > div> p {
+    grid-area: offert;
+    font-size: 70px;
+    color: #e3c808;
+    text-align: center;
 }
 
 #prendi-lascia > div > button {
@@ -227,16 +240,22 @@ body {
     margin: auto;
     border: 0;
     border-radius: 10px;
+    color: black;
+    font-size: 20px;
 
 }
 #prendi-lascia > div > button:hover {
     cursor: pointer;
+    background: #e2bd57;
+    transform: scale(1.1);
  }
 
 #prendi-button {
-    background: green;
+    grid-area: button-1;
+    background: #ecad00;
 }
 
 #lascia-button {
-    background: red;
+    grid-area: button-2;
+    background: #ecad00;
 }
