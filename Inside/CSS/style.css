@@ -91,7 +91,7 @@ body {
 }
 
 #choose-overlay > img {
-    width: 200px;
+    width: 70%;
     margin: auto;
 }
 #choose-overlay > img:hover {

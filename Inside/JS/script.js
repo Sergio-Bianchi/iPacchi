@@ -46,7 +46,7 @@ $("#choosed-overlay > img").click(function() {
     choosed_amount++
     // Se ho scelto 7 pacchi (1 iniziale + 6), passa alla fase successiva
     // TODO, rimettere a 7 sennò esplode
-    if(choosed_amount == 3) {
+    if(choosed_amount == 7) {
         phase3()
     }
 
@@ -228,7 +228,7 @@ function phase3() {
                 $("#bubble-text").text(last_offert + " €, prendere o lasciare")
                 hideJones(3000)
                 $("#prendi-lascia").delay(4000).fadeIn()
-                sleep(9000).then(()=>unlockClick())
+                sleep(6000).then(()=>unlockClick())
 
                 $("#prendi-button").click(function() {
                     $("#prendi-lascia").delay(1000).fadeOut()
@@ -237,16 +237,15 @@ function phase3() {
                 })
                 $("#lascia-button").click(function() {
                     lockClick()
-                    $("#prendi-lascia").delay(1000).fadeOut()
-                    $("#bubble-text").fadeOut(0)
-                    showJones(2000)
                     $("#bubble-text").text("Come non detto... Riprendiamo il nostro gioco!")
-                    $("#bubble-text").delay(4000).fadeIn()
-                    sleep(7000).then(() => {
+                    $("#prendi-lascia").delay(1000).fadeOut()
+                    showJones(3000) 
+                    sleep(8000).then(() => {
                         $("#bubble-text").text("Scegli 3 pacchi")
-                        hideJones(3000)
+                        hideJones(2000)
+                        sleep(4000).then(()=>unlockClick())
                     })
-                    sleep(10000).then(()=>unlockClick())
+                    
                 })
             }
         })
