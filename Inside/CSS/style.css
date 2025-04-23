@@ -259,3 +259,17 @@ body {
     grid-area: button-2;
     background: #ecad00;
 }
+
+
+#victory-overlay {
+    position: absolute;
+    width: 40%;
+    height: 200px;
+    font-size: 60px;
+    text-align: center;
+    font-family: "Caesar Dressing", system-ui;
+    color: white;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%);
+}

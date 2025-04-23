@@ -96,6 +96,25 @@ let next_phase = null
 let last_choice = null
 let player_name = (new URLSearchParams(document.location.search)).get("name")
 
+let soldi_vinti = 0
+
+function setText(text) {
+    $("#bubble-text").text(text)
+}
+
+function openMainPack() {
+    const extracted_index = random_index()
+    const extracted_value = values[extracted_index]
+    values[extracted_index] = -1;
+
+    last_extracted = extracted_value
+    last_element_extracted = this
+    console.log("IL PACCO CONTENEVA "+extracted_value)
+    $("#choosed").attr("src", "../Public/IMG/boxes/"+extracted_value+".png")
+
+
+}
+
 
 function phase1(){
 
@@ -108,7 +127,9 @@ function phase1(){
     $("#choosed-overlay").fadeOut(0)
     $("#dialogue").fadeOut(0)
     $("#prendi-lascia").fadeOut(0)
-    $("#bubble-text").text("Ciao "+ player_name+  "! Benvenuto nel tempio!\n Scegli un pacco")
+    $("#victory-overlay").fadeOut(0)
+
+    setText("Ciao "+ player_name+  "! Benvenuto nel tempio!\n Scegli un pacco")
 
     $("#jones").delay(1000).removeClass("left")
     $("#dialogue").delay(1500).fadeIn()
@@ -130,10 +151,10 @@ function phase2() {
     $("#choose-overlay").delay(1000).fadeOut()
     sleep(2000).then(() => {
         $("#jones").removeClass("left")
-        $("#bubble-text").text("Perfetto! Ottima scelta "+player_name+" \n Ora scegli 6 pacchi")
+        setText("Perfetto! Ottima scelta "+player_name+" \n Ora scegli 6 pacchi")
         $("#dialogue").delay(1500).fadeIn(300)
         $("#bubble-text").fadeIn(300)
-        $("#dialogue").delay(1500).fadeOut()
+        $("#dialogue").delay(1500).fadeOut(500)
         sleep(3500).then(()=>$("#jones").addClass("left"))
     })
 
@@ -191,16 +212,14 @@ function random_index() {
 
 
 function hideJones() {
-    $("#dialogue").fadeOut()
+    $("#dialogue").fadeOut(500)
     $("#jones").addClass("left")
     $(this).delay(2000).dequeue()
 }
 
-function showJones(timeout) {
-    sleep(timeout).then(()=>{
-        $("#jones").removeClass("left")
-        $("#dialogue").delay(2000).fadeIn()
-    })
+function showJones() {
+    $("#jones").removeClass("left")
+    $("#dialogue").delay(2000).fadeIn(500)
 }
 
 function phase3() {
@@ -210,17 +229,17 @@ function phase3() {
     sleep(1000).then(() => {
         $("#jones").removeClass("left")
         $("#dialogue").delay(1500).fadeIn()
-        $("#bubble-text").text("Ottimo. Ora ti farò un'offerta "+player_name)
+        setText("Ottimo. Ora ti farò un'offerta "+player_name)
         lockClick()
 
         sleep(4000).then(() => {
             if(random_bool() && false) {
-                $("#bubble-text").text("OK, adesso scegli un pacco con la quale sostituire il tuo")
+                setText("OK, adesso scegli un pacco con la quale sostituire il tuo")
                 hideJones(3000)
                 
                 
             } else {
-                $("#bubble-text").text(last_offert + " €, prendere o lasciare")
+                setText(last_offert + " €, prendere o lasciare")
                 $(this).delay(4000).queue(hideJones)
                 $("#prendi-lascia-offert").text(last_offert + " €")
                 $("#prendi-lascia").delay(6000).fadeIn()
@@ -230,22 +249,27 @@ function phase3() {
                     $("#prendi-lascia").delay(1000).fadeOut()
                     // TODO
                     // APRIMENTO PACCO TUO STESSO YODA SONO IO 
+                    soldi_vinti = last_offert
+                    lockClick()
+                    setTimeout(phase4, 4000)
                 })
                 $("#lascia-button").click(function() {
                     lockClick()
-                    $("#bubble-text").text("Come non detto... Riprendiamo il nostro gioco!")
+                    setText("Come non detto... Riprendiamo il nostro gioco!")
                     $("#prendi-lascia").delay(1000).fadeOut()
-                    showJones(3000) 
+                    setTimeout(showJones, 3000)
                     let phrase = "Scegli tre pacchi "+player_name
                     if(choosed_amount >= 13) {
                         phrase = "Scegli un pacco "+player_name
                     }
                     sleep(8000).then(() => {
-                        $("#bubble-text").text(phrase)
-                        $(this).delay(2000).queue(hideJones)
-                        sleep(4000).then(()=>unlockClick())
+                        setText(phrase)
+                        sleep(4000).then(()=> {
+                            hideJones()
+                            unlockClick()
+                            return
+                        })
                     })
-                    
                 })
             }
         })
@@ -254,8 +278,18 @@ function phase3() {
 
 
 function phase4() {
+    
     console.log("PHASE 4")
+    setText("HAI VINTO " + soldi_vinti + " € !")
+    showJones()
+    console.log("HAI VINTO " + soldi_vinti + " €")
+    setTimeout(openMainPack, 5000)
+
+    //$("#victory-overlay").fadeIn()
+    //$("#victory-overlay > p").text("HAI VINTO " + soldi_vinti + " € !")
 }
+
+
 
 
 
